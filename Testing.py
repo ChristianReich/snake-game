@@ -10,3 +10,4 @@ __updated__ = "2021-04-27"
 """
 print("hello world")
 x = 14
+print("pass")

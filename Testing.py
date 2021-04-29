@@ -9,4 +9,4 @@ __updated__ = "2021-04-29"
 -------------------------------------------------------
 """
 print("hello world")
-print("addition")
+print("pass")

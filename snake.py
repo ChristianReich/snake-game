@@ -19,6 +19,39 @@ class Snake:
         self.body = [Vector2(5, 10)]
         self.direction = Vector2(1, 0)
 
+        self.head_up = pygame.image.load(
+            'Graphics/head_up.png').convert_alpha()
+        self.head_down = pygame.image.load(
+            'Graphics/head_down.png').convert_alpha()
+        self.head_right = pygame.image.load(
+            'Graphics/head_right.png').convert_alpha()
+        self.head_left = pygame.image.load(
+            'Graphics/head_left.png').convert_alpha()
+
+        self.tail_up = pygame.image.load(
+            'Graphics/tail_up.png').convert_alpha()
+        self.tail_down = pygame.image.load(
+            'Graphics/tail_down.png').convert_alpha()
+        self.tail_right = pygame.image.load(
+            'Graphics/tail_right.png').convert_alpha()
+        self.tail_left = pygame.image.load(
+            'Graphics/tail_left.png').convert_alpha()
+
+        self.body_vertical = pygame.image.load(
+            'Graphics/body_vertical.png').convert_alpha()
+        self.body_horizontal = pygame.image.load(
+            'Graphics/body_horizontal.png').convert_alpha()
+
+        self.body_tr = pygame.image.load(
+            'Graphics/body_tr.png').convert_alpha()
+        self.body_tl = pygame.image.load(
+            'Graphics/body_tl.png').convert_alpha()
+        self.body_br = pygame.image.load(
+            'Graphics/body_br.png').convert_alpha()
+        self.body_bl = pygame.image.load(
+            'Graphics/body_bl.png').convert_alpha()
+        self.crunch_sound = pygame.mixer.Sound('Sound/crunch.wav')
+
     def draw_snake(self):
         for block in self.body:
             block_rect = pygame.Rect(
@@ -52,7 +85,7 @@ class Fruit:
     def draw_fruit(self):
         fruit = pygame.Rect(self.pos.x * CELL_SIZE,
                             self.pos.y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
-        pygame.draw.rect(SCREEN, (255, 43, 43), fruit)
+        SCREEN.blit(apple, fruit)
 
     def new_fruit(self):
         self.x = random.randint(0, CELL_NUMBER - 1)
@@ -94,6 +127,8 @@ SCREEN = pygame.display.set_mode(
 CLOCK = pygame.time.Clock()
 FRAMERATE = 90
 
+apple = pygame.image.load('apple.png').convert_alpha()
+
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
 
@@ -107,13 +142,13 @@ while True:
         if event.type == SCREEN_UPDATE:
             main_game.update()
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP and main_game.snake.direction.y != 1:
                 main_game.snake.direction = Vector2(0, -1)
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN and main_game.snake.direction.y != -1:
                 main_game.snake.direction = Vector2(0, 1)
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT and main_game.snake.direction.x != 1:
                 main_game.snake.direction = Vector2(-1, 0)
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT and main_game.snake.direction.x != -1:
                 main_game.snake.direction = Vector2(1, 0)
     SCREEN.fill((255, 210, 26))
     main_game.draw_elements()

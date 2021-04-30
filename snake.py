@@ -5,7 +5,7 @@
 Author:  Your Name
 ID:      Your ID
 Email:   your email@mylaurier.ca
-__updated__ = "2021-04-29"
+__updated__ = "2021-04-30"
 -------------------------------------------------------
 """
 import pygame
@@ -117,6 +117,9 @@ class Main:
     def game_over(self):
         if self.snake.body[0] in self.snake.body[1:]:
             print("game over")
+            print("Your score was {}".format(self.score))
+            pygame.quit()
+            sys.exit()
 
 
 pygame.init()

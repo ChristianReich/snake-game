@@ -5,7 +5,7 @@
 Author:  Your Name
 ID:      Your ID
 Email:   your email@mylaurier.ca
-__updated__ = "2021-05-12"
+__updated__ = "2021-05-22"
 -------------------------------------------------------
 """
 import random
@@ -157,6 +157,7 @@ class Main:
         self.draw_grass()
         self.snake.draw_snake()
         self.fruit.draw_fruit()
+        self.draw_score()
 
     def check_collision(self):
         if self.fruit.pos == self.snake.body[0]:
@@ -187,15 +188,23 @@ class Main:
                             col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE)
                         pygame.draw.rect(SCREEN, grass_colour, grass_rect)
 
+    def draw_score(self):
+        score_text = FONT.render(
+            "Score: {}".format(self.score), True, (0, 0, 255))
+        score_rect = pygame.Rect(
+            1 * CELL_SIZE, 1 * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+        SCREEN.blit(score_text, score_rect)
+
 
 pygame.init()
 CELL_SIZE = 40
 CELL_NUMBER = 20
 SCREEN = pygame.display.set_mode(
     (CELL_NUMBER * CELL_SIZE, CELL_NUMBER * CELL_SIZE))
+pygame.display.set_caption('Snake')
+FONT = pygame.font.Font('Font/PoetsenOne-Regular.ttf', 32)
 CLOCK = pygame.time.Clock()
 FRAMERATE = 90
-
 apple = pygame.image.load('apple.png').convert_alpha()
 
 SCREEN_UPDATE = pygame.USEREVENT
